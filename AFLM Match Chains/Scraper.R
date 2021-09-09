@@ -1,7 +1,7 @@
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(lubridate)
+require(httr)
+require(jsonlite)
+require(dplyr)
+require(lubridate)
 
 ### USER FUNCTION
 
