@@ -67,7 +67,7 @@ get_round_games <- function(season,round) {
   games <- games[[5]]
 
   if (length(games) > 0) {
-    games <- games %>% filter(status != "SCHEDULED")
+    games <- games %>% filter(status == "CONCLUDED")
     if (nrow(games) > 0) {
       games <- games %>% select(matchId,utcStartTime,roundNumber,venue.name,homeTeam.teamName,awayTeam.teamName,homeTeamScore.totalScore,awayTeamScore.totalScore)
       games$date <- substr(games$utcStartTime, 1, 10)
@@ -105,7 +105,6 @@ get_players <- function() {
 ### CHAIN DATA FUNCTIONS
 get_many_game_chains <- function(games) {
 
-  
   pb <- txtProgressBar(max = nrow(games), style = 3, width = 50, char = ">")
   pb %>% getTxtProgressBar()
   
