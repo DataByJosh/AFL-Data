@@ -4,6 +4,7 @@ library(dplyr)
 library(lubridate)
 library(purrr)
 library(furrr)
+library(progressr)
 
 future::plan("multisession")
 ### USER FUNCTION
@@ -26,7 +27,7 @@ get_match_chains <- function(season = year(Sys.Date()), round = NA) {
   }
   
   cat("\nScraping match chains...\n\n")
-  chains <- get_many_game_chains(games)
+  chains <- with_progress({get_many_game_chains(games)})
   players <- get_players()
   chains <- inner_join(chains, games, by = "matchId")
   chains <- left_join(chains, players, by = "playerId")
@@ -109,7 +110,12 @@ get_players <- function() {
 ### CHAIN DATA FUNCTIONS
 get_many_game_chains <- function(games) {
 
-  chains <- future_map_dfr(games[,1],~ get_game_chains(.),.progress = FALSE)
+  p <- progressor(steps = length(games[,1]))
+    
+  chains <- future_map_dfr(games[,1],
+                            ~{p() 
+                              get_game_chains(.)
+                              },.progress = FALSE)
 
   return(chains)
 }
