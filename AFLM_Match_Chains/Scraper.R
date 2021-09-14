@@ -17,8 +17,10 @@ get_match_chains <- function(season = year(Sys.Date()), round = NA) {
   if (is.na(round)) {
     cat("No round value supplied.\nFunction will scrape all rounds in the season.\nThis may take some time.\n")
     games <- get_season_games(season)
+    games_vector <- games[,"matchId"] 
   } else {
     games <- get_round_games(season, round)
+    games_vector <- games[,"matchId"] 
   }
 
   if (length(games) == 0) {
@@ -27,7 +29,7 @@ get_match_chains <- function(season = year(Sys.Date()), round = NA) {
 
   cat("\nScraping match chains...\n\n")
   chains <- with_progress({
-    get_many_game_chains(games)
+    get_many_game_chains(games_vector)
   })
   players <- get_players()
   chains <- inner_join(chains, games, by = "matchId")
@@ -109,10 +111,10 @@ get_players <- function() {
 }
 
 ### CHAIN DATA FUNCTIONS
-get_many_game_chains <- function(games) {
-  p <- progressor(steps = length(games[, 1]))
+get_many_game_chains <- function(games_vector) {
+  p <- progressor(steps = length(games_vector))
 
-  chains <- future_map_dfr(games[, 1],
+  chains <- future_map_dfr(games_vector,
     ~ {
       p()
       get_game_chains(.)
