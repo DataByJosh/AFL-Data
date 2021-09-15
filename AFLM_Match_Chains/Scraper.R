@@ -17,10 +17,10 @@ get_match_chains <- function(season = year(Sys.Date()), round = NA) {
   if (is.na(round)) {
     cat("No round value supplied.\nFunction will scrape all rounds in the season.\nThis may take some time.\n")
     games <- get_season_games(season)
-    games_vector <- games[,"matchId"] 
+    games_vector <- games[, "matchId"]
   } else {
     games <- get_round_games(season, round)
-    games_vector <- games[,"matchId"] 
+    games_vector <- games[, "matchId"]
   }
 
   if (length(games) == 0) {
@@ -130,25 +130,31 @@ get_game_chains <- function(match_id) {
   chains_t1 <- access_api(url)
   chains_t2 <- chains_t1[[8]]
 
-  chains <- map_df(1:nrow(chains_t2), ~ get_single_chain(chains_t2, .))
+  if (!is.null(dim(chains_t2))) {
+    if (nrow(chains_t2) > 0) {
+      chains <- map_df(1:nrow(chains_t2), ~ get_single_chain(chains_t2, .))
 
-  chains$matchId <- chains_t1$matchId
-  chains$venueWidth <- chains_t1$venueWidth
-  chains$venueLength <- chains_t1$venueLength
-  chains$homeTeamDirectionQtr1 <- chains_t1$homeTeamDirectionQtr1
+      chains$matchId <- chains_t1$matchId
+      chains$venueWidth <- chains_t1$venueWidth
+      chains$venueLength <- chains_t1$venueLength
+      chains$homeTeamDirectionQtr1 <- chains_t1$homeTeamDirectionQtr1
 
-  return(chains)
+      return(chains)
+    }
+  }
 }
 
 get_single_chain <- function(chains_t2, chain_number) {
-  chains_t3 <- chains_t2[[chain_number, 6]]
+  if (length(chains_t2) > 5) {
+    chains_t3 <- chains_t2[[chain_number, 6]]
 
-  if (length(chains_t3 > 0)) {
-    chains_t3$finalState <- chains_t2$finalState[chain_number]
-    chains_t3$initialState <- chains_t2$initialState[chain_number]
-    chains_t3$period <- chains_t2$period[chain_number]
-    chains_t3$chain_number <- chain_number
+    if (length(chains_t3 > 0)) {
+      chains_t3$finalState <- chains_t2$finalState[chain_number]
+      chains_t3$initialState <- chains_t2$initialState[chain_number]
+      chains_t3$period <- chains_t2$period[chain_number]
+      chains_t3$chain_number <- chain_number
 
-    return(chains_t3)
+      return(chains_t3)
+    }
   }
 }
