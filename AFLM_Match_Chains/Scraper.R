@@ -6,7 +6,7 @@ library(purrr)
 library(furrr)
 library(progressr)
 
-future::plan("multisession")
+### future::plan("multisession") ### USE MULTISESSION FOR QUICKEST RESULTS
 ### USER FUNCTION
 
 get_match_chains <- function(season = year(Sys.Date()), round = NA) {
