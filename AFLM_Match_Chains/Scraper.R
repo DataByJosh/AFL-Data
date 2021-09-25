@@ -66,7 +66,7 @@ get_round_games <- function(season,round) {
   games <- access_api(url)
   games <- games[[5]]
 
-  if (length(games) > 0) {
+  if (nrow(games) > 0) {
     games <- games %>% filter(status == "CONCLUDED")
     if (nrow(games) > 0) {
       games <- games %>% select(matchId,utcStartTime,roundNumber,venue.name,homeTeam.teamName,awayTeam.teamName,homeTeamScore.totalScore,awayTeamScore.totalScore)
@@ -112,14 +112,19 @@ get_many_game_chains <- function(games) {
   
   pb %>% setTxtProgressBar(value = 1)
   pb %>% getTxtProgressBar()
-
-  for (i in 2:nrow(games)) {
-    new <- get_game_chains(games[[i,1]])
-    chains <- bind_rows(chains,new)
-    pb %>% setTxtProgressBar(value = i)
-    pb %>% getTxtProgressBar()
+  
+  if (nrow(games) > 1) {
+    for (i in 2:nrow(games)) {
+      new <- get_game_chains(games[[i,1]])
+      chains <- bind_rows(chains,new)
+      pb %>% setTxtProgressBar(value = i)
+      pb %>% getTxtProgressBar()
+    }
   }
-
+  
+  else
+    pb %>% setTxtProgressBar(value = 1)
+  
   return(chains)
 }
 
