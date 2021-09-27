@@ -66,7 +66,7 @@ get_round_games <- function(season,round) {
   games <- access_api(url)
   games <- games[[5]]
 
-  if (nrow(games) > 0) {
+  if (length(games) > 0) {
     games <- games %>% filter(status == "CONCLUDED")
     if (nrow(games) > 0) {
       games <- games %>% select(matchId,utcStartTime,roundNumber,venue.name,homeTeam.teamName,awayTeam.teamName,homeTeamScore.totalScore,awayTeamScore.totalScore)
