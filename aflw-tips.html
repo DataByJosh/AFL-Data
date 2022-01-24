@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>AFLW Tips | Data by Josh</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.3.9000/reactable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="shortcut icon" href="images/browserlogo.png" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Data by Josh</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Tips
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="aflw-tips.html">AFLW Tips</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dashboards
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="aflm-demo-dashboards.html">AFLM Team Demographics Dashboards</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:&lt;josh@databyjosh.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/databyjosh">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><p style="text-align:center;">
+<img src="images/colourlogo.png" style="width:100%;">
+</p></h1>
+
+</div>
+
+
+<div id="aflw-tips" class="section level1">
+<h1><strong>AFLW Tips</strong></h1>
+<p>Displayed on this page are the predictions and results of my AFLW tipping model so far in season 2022. Tips are released on a round-by-round basis and may be updated several times during the week. An FAQ is available at the bottom of the page.</p>
+<hr />
+<div id="htmlwidget-270783752f6f544f5c19" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-270783752f6f544f5c19">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"games":["Games Completed"],"atips":["Correct Tips"],"accuracy":["Accuracy⠀"],"mae":["MAE"],"bits":["Bits"]},"columns":[{"accessor":"games","name":"18","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"accessor":"atips","name":"14","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"accessor":"accuracy","name":"77.8%","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"accessor":"mae","name":"16.2","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"},{"accessor":"bits","name":"7.10","type":"character","na":"–","align":"center","vAlign":"top","headerVAlign":"top","className":"cell"}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"borderWidth":0,"cellPadding":0,"headerStyle":{"fontSize":35,"fontWeight":"bold","height":40},"rowStyle":{"fontSize":15,"fontWeight":"normal","color":"dimgrey","height":30}},"dataKey":"3b5f4e05725ce125bd16730c1076ebca"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<hr />
+<div id="htmlwidget-7f53cd11b670ac661012" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7f53cd11b670ac661012">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"icon":["ca.png","nm.png","fr.png","me.png","ad.png","co.png","gw.png","ad.png","wc.png","ca.png","co.png","me.png","gw.png","co.png","br.png","wc.png","me.png","nm.png","ri.png"],"winner":["Carlton","North Melbourne","Fremantle","Melbourne","Adelaide","Collingwood","GWS","Adelaide","West Coast","Carlton","Collingwood","Melbourne","GWS","Collingwood","Brisbane","West Coast","Melbourne","North Melbourne","Richmond"],"loser":["Brisbane","GWS","Richmond","St Kilda","West Coast","Geelong","Fremantle","North Melbourne","Gold Coast","Geelong","St Kilda","Richmond","Gold Coast","Carlton","Adelaide","Fremantle","Bulldogs","Geelong","St Kilda"],"margin":[10,17,9,52,35,28,13,3,17,22,36,15,26,7,1,5,22,23,16],"probability":[0.67,0.77,0.66,0.99,0.92,0.9,0.72,0.55,0.78,0.84,0.95,0.75,0.87,0.62,0.51,0.59,0.83,0.85,0.76],"result":[2,1,1,1,1,1,0,1,0,1,1,1,1,1,0,0,1,1,1],"abserr":["NA",10.2469427095813,20.5043060078184,11.3988033811572,1.86831276763917,17.462078891683,44.8954100413387,9.99665704200452,30.0358188701961,8.04518394064381,9.09306666107886,1.06477901202213,10.8152935261313,12.3309126460094,30.1934137592812,33.351375898048,2.23260134886629,15.2423617710109,21.948055092971],"bits":["NA",0.627038438189746,0.408847709837633,0.985778966978906,0.910382290279084,0.844019524993857,-0.821720600958872,0.145876710822862,-1.15830726889664,0.74312100035464,0.919938301793,0.579217885665124,0.807129004828583,0.302803848984576,-0.00994934998773433,-0.301105582068858,0.737825073274929,0.765006040554081,0.609105029984053]},"columns":[{"accessor":"icon","name":"","type":"character","cell":[{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ca.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/fr.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gw.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ad.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ca.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/gw.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/co.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/br.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/wc.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/me.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/nm.png","height":"24px"},"children":[]}]},{"name":"div","attribs":{},"children":[{"name":"img","attribs":{"src":"images/ri.png","height":"24px"},"children":[]}]}],"na":"–","width":50,"align":"center","vAlign":"center","className":"cell"},{"accessor":"winner","name":"TIP","type":"character","cell":[{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Carlton"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Brisbane"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat GWS"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Fremantle"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat West Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["GWS"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Adelaide"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat North Melbourne"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["West Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Carlton"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Richmond"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["GWS"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Gold Coast"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Collingwood"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Carlton"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Brisbane"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Adelaide"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["West Coast"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Fremantle"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Bulldogs"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["North Melbourne"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat Geelong"]}]},{"name":"div","attribs":{},"children":[{"name":"div","attribs":{"style":{"fontWeight":"bold"}},"children":["Richmond"]},{"name":"div","attribs":{"style":{"fontSize":12}},"children":["to defeat St Kilda"]}]}],"width":175,"align":"left","className":"cell"},{"accessor":"loser","name":"loser","type":"character","show":false},{"accessor":"margin","name":"MARGIN","type":"numeric","na":"–","align":"center","vAlign":"center","className":"cell"},{"accessor":"probability","name":"CHANCE","type":"numeric","format":{"cell":{"digits":0,"percent":true},"aggregated":{"digits":0,"percent":true}},"na":"–","align":"center","vAlign":"center","className":"cell","style":[{"background":"#FEC466","borderRight":"2px solid black"},{"background":"#FDAA49","borderRight":"2px solid black"},{"background":"#FEC76A","borderRight":"2px solid black"},{"background":"#FC522B","borderRight":"2px solid black"},{"background":"#FC6D34","borderRight":"2px solid black"},{"background":"#FC7537","borderRight":"2px solid black"},{"background":"#FEB956","borderRight":"2px solid black"},{"background":"#FEE18F","borderRight":"2px solid black"},{"background":"#FDA547","borderRight":"2px solid black"},{"background":"#FD8E3F","borderRight":"2px solid black"},{"background":"#FC6230","borderRight":"2px solid black"},{"background":"#FEB24C","borderRight":"2px solid black"},{"background":"#FD823B","borderRight":"2px solid black"},{"background":"#FED077","borderRight":"2px solid black"},{"background":"#FEEA9C","borderRight":"2px solid black"},{"background":"#FED781","borderRight":"2px solid black"},{"background":"#FD9241","borderRight":"2px solid black"},{"background":"#FD8A3E","borderRight":"2px solid black"},{"background":"#FDAD4A","borderRight":"2px solid black"}]},{"accessor":"result","name":"ACCURACY","type":"numeric","cell":[{"name":"img","attribs":{"src":"images/qm.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/cross.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]},{"name":"img","attribs":{"src":"images/tick.png","height":"24px"},"children":[]}],"na":"–","align":"center","vAlign":"center","className":"cell"},{"accessor":"abserr","name":"MAE","type":"numeric","format":{"cell":{"digits":0},"aggregated":{"digits":0}},"na":"–","align":"center","vAlign":"center","className":"cell"},{"accessor":"bits","name":"BITS","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}},"na":"–","align":"center","vAlign":"center","className":"cell"}],"columnGroups":[{"name":"Predictions","columns":["icon","winner","margin","probability"]},{"name":"Results","columns":["result","abserr","bits"]}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":false,"minRows":1,"highlight":true,"borderless":true,"theme":{"borderColor":"white","headerStyle":{"borderBottom":"2px solid black","fontWeight":"normal"},"groupHeaderStyle":{"fontSize":20,"fontWeight":"bold"},"rowStyle":{"borderBottom":"1px solid gray"}},"dataKey":"80396b38c658e1b5f8a95a015ab60aed"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="faq" class="section level3">
+<h3>FAQ</h3>
+<details>
+<summary>
+<strong>How does it work?</strong>
+</summary>
+<p>There are three elements to each prediction in the table: <strong>tip</strong>, the team the model is tipping to win; <strong>margin</strong>, the amount of points the model is tipping that team to win by; and <strong>chance</strong>, the percentage likelihood of the tipped team winning by any margin. The table also includes methods of evaluating all three elements of the tip. These are discussed in detail in the other FAQs.</p>
+The model is still in development and as such I am not currently releasing the details of how it makes predictions, but I may decide to do so in the future. You are welcome to use the information below as you see fit, but please note that you do so at your own risk. I do not recommend or encourage the use of this information for betting.
+</details>
+<details>
+<summary>
+<strong>What is accuracy?</strong>
+</summary>
+<p><strong>Accuracy</strong>, quite simply, records whether the tip was right or wrong. If the team being tipped to win the game does win, you will see a green tick. For any other result you will see a red cross. Until the result is known, you will see a black question mark.</p>
+<p>Most users of a tipping model will be primarily concerned with how often it correctly picks the winning team. Accuracy provides a direct answer to this question.</p>
+However, past accuracy is not always the best predictor of future accuracy. This is why other methods of evaluation are included.
+</details>
+<details>
+<summary>
+<strong>What is MAE?</strong>
+</summary>
+<p>The acronym <strong>MAE</strong> stands for <strong>Mean Absolute Error</strong>.</p>
+<p>The error of a tip is the amount by which the real-world margin differs from the predicted margin. For example, if the model tips the home team to win by 20 points, and they instead win by 35, the error for that tip will be 15. If they win by 5, it will be -15.</p>
+<p>The absolute error is the same number, but is always a positive value. In the scenario above, whether the home team wins by 35 or 5, the absolute error of the tip will be 15.</p>
+<p>Therefore, <strong>the mean absolute error is the average number of points by which the margin prediction was wrong.</strong> The lower the MAE, the better the model.</p>
+<p>In comparison to accuracy, MAE is a superior predictor of future accuracy. Why is this?</p>
+<p>Imagine a match with tips provided by two models. Model A predicts the home team will win by 2 points. Model B predicts the away team will win by 30 points. The match is played, and the away team wins by 4 points.</p>
+<p>Model A better predicted the outcome of the match - it was only 6 points off, while Model B missed by 26. But, Model B predicted the right team, and Model A the wrong one. This would be reflected in MAE, but the <em>accuracy</em> would incorrectly report Model B as superior.</p>
+This is an outcome that, understandably, can feel counter-intuitive. <a href="http://www.matterofstats.com/mafl-stats-journal/2017/6/9/tipping-accuracy-vs-mae-as-a-footy-forecaster-metric">If you’re interested in reading more, I highly recommend Tony Corke’s article on the topic on his website, Matter of Stats.</a>
+</details>
+<details>
+<summary>
+<strong>What are bits?</strong>
+</summary>
+<p>The <strong>bits</strong> measurement evaluates ‘chance’, the probability of the tipped team winning the match by any margin.</p>
+<p>If the tip is accurate, then the model will be awarded some value of bits, depending on how probable the model declared the tip to be. The more confident the model is in its tip, the more bits it will receive if the tip is correct.</p>
+<p>However, the same is true in reverse. If the tip is inaccurate, the model loses some value of bits, and this value grows larger depending on how confident the model was in the faulty prediction. A draw result also sees the model lose bits, albeit not as many.</p>
+<p>As such, bits provides something of a compromise between accuracy and MAE. It’s a score that goes up or down depending on the real world outcome of the match, but with the acknowledgement that the confidence in a prediction is just as important as the prediction itself.</p>
+Bits are used to score the Monash University Probabilistic Footy Tipping Competition. <a href="https://probabilistic-footy.monash.edu/~footy/about.shtml#info">You can find more information on how they are calculated on their website.</a>
+</details>
+<p> </p>
+<p><strong>Last updated:</strong> 6:00pm, 24 Jan 2022 (AEDT).</p>
+</div>
+</div>
+
+<hr />
+<p style="text-align: center;"><b>Feedback, corrections, coding tips, questions and suggestions are always welcome.</b></p>
+<p style="text-align: center;"><b><a href="mailto:josh@databyjosh.com">Email</a> | <a href="https://twitter.com/databyjosh">Twitter</a></b></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
