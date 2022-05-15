@@ -131,7 +131,7 @@ get_many_game_chains <- function(games) {
 get_game_chains <- function(match_id) {
 
 
-  url <- paste0("https://api.afl.com.au/cfs/afl/matchChains/",match_id)
+  url <- paste0("https://sapi.afl.com.au/afl/matchPlays/",match_id)
   chains_t1 <- access_api(url)
   chains_t2 <- chains_t1[[8]]
 
