@@ -2,8 +2,8 @@
 
 This folder contains csv files of data scraped from public tipping competitions in past and current AFLW and AFLM seasons. Each file represents a single season and will be updated on a round-by-round basis as the season progresses. The competition and season are identified in the file name.
 
-Currently available:
-AFLM 2022
+Currently available:  
+AFLM 2022  
 AFLW 2022B (in progress)
 
 The dataset in each file contains 11 variables. These variables are defined as follows:
