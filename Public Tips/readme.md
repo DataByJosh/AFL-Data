@@ -4,7 +4,7 @@ This folder contains csv files of data scraped from public tipping competitions 
 
 Currently available:  
 AFLM 2022  
-AFLW 2022B (in progress)
+AFLW 2022B
 
 The dataset in each file contains 11 variables. These variables are defined as follows:
 
@@ -21,5 +21,7 @@ The dataset in each file contains 11 variables. These variables are defined as f
 **away_count** - The total count of participants who tipped the away team.
 
 The dataset in each file should contain one and only one observation for each combination of game_id and provider.
+
+None of the competitions data has been scraped from currently include finals matches, so data is available for home and away matches only.
 
 Because the sum total of home_count and away_count fluctuates from match to match, it is assumed that this data only captures tips actually entered by participants, and therefore any incidences of missed tips being automatically assigned the away team are not counted.
